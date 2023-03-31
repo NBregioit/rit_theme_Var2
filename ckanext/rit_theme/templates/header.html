@@ -1,0 +1,46 @@
+{% ckan_extends %}
+
+{% block header_logo %}
+
+<div class="ODPIntro">
+  <div class="ODPLogo">
+    <a href="{{ h.url_for("home.index") }}"><img style="width:150px;height:auto;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Regio_IT_Logo.svg/2560px-Regio_IT_Logo.svg.png" alt="regioit Logo"></a>
+  </div>
+
+  <div class="ODPName">
+    <a href="{{ h.url_for("home.index") }}"><h1>Open Data Portal regioiT</h1></a>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block header_account_container_content %}
+
+<div class="navLinks">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link-Home" href="https://www.regioit.de"><span>Homepage</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://www.google.de">GeoPortal</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ h.url_for("home.about") }}">Impressum</a>
+    </li>
+  </ul>
+</div>
+
+{{ super() }}
+{% endblock %}
+
+{% block header_site_navigation_tabs %}
+  {{ h.build_nav_main(
+    ("dataset.search", _("Datasets")),
+    ("organization.index", _("Organisation")),
+    ("group.index", _("Groups")),
+    ("home.about", _("About"))
+    ) }}
+{% endblock %}
+
+{% block header_site_search %}
+{% endblock %}

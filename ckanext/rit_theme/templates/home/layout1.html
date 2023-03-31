@@ -1,0 +1,185 @@
+<div role="main" class="mainClass">
+
+  <div class="welcomeDiv">
+    <!--
+    <div class="divMaintain">
+      <h3>Hinweis:</h3>
+      <p>Am XX.XX.XXXX finden zwischen XX:XX und XX:XX Wartungsarbeiten statt.</p>
+    </div>
+    -->
+  </div>
+
+  <div class="SearchDiv">
+    <div class="input-group rounded">
+      <form class="SearchField" action="{% url_for "dataset.search" %}" method="get">
+        <h1><em>Was suchen Sie?</em></h1>
+        <input type="search" name="q" value="" class="form-control rounded" placeholder="Datensatz-Suche" aria-label="Search" aria-describedby="search-addon" />
+      </form>
+    </div>
+  </div>
+
+  <div class="divIntroText">
+    <h1><em>Willkommen im Open Data Portal</em></h1>
+    {% block promoted %}
+      {% snippet "home/snippets/promoted.html" %}
+    {% endblock %}
+  </div>
+
+  <div class="groupGrid">
+    <h1 style="color:white"><em>Kategorien</em></h1>
+    <div class="grid-container">
+      {% for entry in h.customer_groups() %}
+      {% set type = entry.type %}
+      {% set url = h.url_for(type ~ '.read', id=entry.name) %}
+        <a style="text-decoration: none; color: #000000;" href="{{ url }}">
+          <div class="grid-item">
+          <a style="text-decoration: none; color: #000000;" href="{{ url }}">
+            <img src="{{ entry.image_display_url or h.url_for_static('/base/images/placeholder-group.png') }}" alt="Gruppenbild">
+            <p><strong>{{ entry.display_name }}</strong></p>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="infoGrid">
+    <h1 style="color:white"><em>Informationen</em></h1>
+
+    <!-- Option 1
+    <div class="editGrid">
+      <div class="card-header">
+        <h2><em>Zuletzt bearbeitet</em></h2>
+      </div>
+      <div class="grid-container">
+        {% for entry in h.newest_Data() %}
+        {% set type = 'dataset' %}
+        {% set url = h.url_for(type ~ '.read', id=entry.name.lower()) %}
+          <div class="grid-item">
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">{{ entry.name }}</h5>
+                <p class="card-text">{{ entry.notes[0:50] }}[...]<br><br><em>{{ entry.num_resources }} Datensätze</em></p>
+                <a href="{{ url }}" class="btn btn-primary">Datensatz ansehen</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    -->
+
+    <!-- Option 2 -->
+    <div class="editGrid">
+      <div class="card-header">
+        <h2><em>Zuletzt bearbeitet</em></h2>
+      </div>
+      <div class="flip-card">
+        {% for entry in h.newest_Data() %}
+        {% set type = 'dataset' %}
+        {% set url = h.url_for(type ~ '.read', id=entry.name.lower()) %}
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h5 class="card-title">{{ entry.name }}</h5>
+              <p class="card-text">{{ entry.notes[0:50] }}[...]<br><br><em>{{ entry.num_resources }} Datensätze</em></p>
+            </div>
+            <div class="flip-card-back">
+              <a href="{{ url }}" class="btn btn-primary">Datensatz ansehen</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!--  Option 1
+    <div class="divStatistics">
+      <table class="table">
+        <tr>
+          <th><h3><em>Daten</em></h3></th>
+          {% set datacount = h.get_site_statistics()['dataset_count'] %}
+          <td><h3>{{ datacount }}</h3></td>
+        </tr>
+        <tr>
+          <th><h3><em>Gruppen</em></h3></th>
+          <td><h3>{{ h.get_site_statistics()['group_count'] }}</h3></td>
+        </tr>
+        <tr>
+          <th><h3><em>Organisationen</em></h3></th>
+          <td><h3>{{ h.get_site_statistics()['organization_count'] }}</h3></td>
+        </tr>
+      </table>
+    </div>
+    -->
+
+    <!--  Option 2 -->
+    <div class="divStatistics">
+      <h2><em>Statistik</em></h2>
+      <div class="divDatacount">
+        {% set datacount = h.get_site_statistics()['dataset_count'] %}
+        <h3><a href="{{ h.url_for("/dataset") }}" data-replace="{{ datacount }}"><span>Daten</span></a></h3>
+      </div>
+      <div class="divGroupcount">
+        {% set groupcount = h.get_site_statistics()['group_count'] %}
+        <h3><a href="{{ h.url_for("/group") }}" data-replace="{{ groupcount }}"><span>Gruppen</span></a></h3>
+      </div>
+      <div class="divOrganizationcount">
+        {% set organizationcount = h.get_site_statistics()['organization_count'] %}
+        <h3><a href="{{ h.url_for("/organization") }}" data-replace="{{ organizationcount }}"><span>Organisation</span></a></h3>
+      </div>
+    </div>
+
+    <!-- Option 3
+    <div class="divStatistics">
+      <h2><em>Statistik</em></h2>
+      <div class="divStatCards">
+        <div class="divDatacount">
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <h2 class="card-title">Daten</h2>
+              </div>
+              <div class="flip-card-back">
+              {% set datacount = h.get_site_statistics()['dataset_count'] %}
+                <h2><a href="{{ h.url_for("/dataset") }}">{{ datacount }}</a></h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="divGroupcount">
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <h2 class="card-title">Gruppen</h2>
+              </div>
+              <div class="flip-card-back">
+              {% set groupcount = h.get_site_statistics()['group_count'] %}
+                <h2><a href="{{ h.url_for("/group") }}">{{ groupcount }}</a></h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="divOrganizationcount">
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <h2 class="card-title">Organisation</h2>
+              </div>
+              <div class="flip-card-back">
+              {% set organizationcount = h.get_site_statistics()['organization_count'] %}
+                <h2><a href="{{ h.url_for("/organization") }}">{{ organizationcount }}</a></h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    -->
+
+    <div class="divNews">
+      <h2><em>Neuigkeiten</em></h2>
+      {{ h.render_markdown(g.site_about) }}
+    </div>
+
+  </div>
+
+
+</div>

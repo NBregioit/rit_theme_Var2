@@ -1,0 +1,14 @@
+# rit_theme-js:
+#   filter: rjsmin
+#   output: ckanext-rit_theme/%(version)s-rit_theme.js
+#   contents:
+#     - js/rit_theme.js
+#   extra:
+#     preload:
+#       - base/main
+
+# rit_theme-css:
+#   filter: cssrewrite
+#   output: ckanext-rit_theme/%(version)s-rit_theme.css
+#   contents:
+#     - css/rit_theme.css

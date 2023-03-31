@@ -1,0 +1,10 @@
+{% ckan_extends %}
+{% block admin_form %}
+    {{ form.input('ckan.site_title', id='field-ckan-site-title', label=_('Site Title'), value=data['ckan.site_title'], error=error, classes=['control-medium']) }}
+
+    {{ form.input('ckan.site_description', id='field-ckan-site-description', label=_('Site Tag Line'), value=data['ckan.site_description'], error=error, classes=['control-medium']) }}
+
+    {{ form.markdown('ckan.site_intro_text', id='field-ckan-site-intro-text', label=_('Intro Text'), value=data['ckan.site_intro_text'], error=error, placeholder=_('Text on home page')) }}
+
+    {{ form.markdown('ckan.site_about', id='field-ckan-site-about', label=_('News'), value=data['ckan.site_about'], error=error, placeholder=_('News-Text')) }}
+{% endblock %}

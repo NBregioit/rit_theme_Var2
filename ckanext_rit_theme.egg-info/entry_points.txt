@@ -1,0 +1,7 @@
+
+        [ckan.plugins]
+        rit_theme=ckanext.rit_theme.plugin:RitThemePlugin
+
+        [babel.extractors]
+        ckan = ckan.lib.extract:extract_ckan
+    
