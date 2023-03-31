@@ -301,7 +301,6 @@ h3 {
   left: 25%;
 }
 
-/*
 .editGrid .grid-container {
   height: auto;
   box-sizing: border-box;
@@ -312,7 +311,6 @@ h3 {
   grid-gap: 10px;
   grid-auto-rows: minmax(auto, auto);
 }
-*/
 
 /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 .editGrid .flip-card {
