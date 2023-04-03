@@ -31,13 +31,11 @@
       {% for entry in h.customer_groups() %}
       {% set type = entry.type %}
       {% set url = h.url_for(type ~ '.read', id=entry.name) %}
-        <a style="text-decoration: none; color: #000000;" href="{{ url }}">
           <div class="grid-item">
           <a style="text-decoration: none; color: #000000;" href="{{ url }}">
             <img src="{{ entry.image_display_url or h.url_for_static('/base/images/placeholder-group.png') }}" alt="Gruppenbild">
             <p><strong>{{ entry.display_name }}</strong></p>
           </div>
-        </a>
       {% endfor %}
     </div>
   </div>
